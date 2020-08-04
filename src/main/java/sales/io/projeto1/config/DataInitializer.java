@@ -39,11 +39,15 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 //		User user = userRepository.findByName("Maria");
 //		System.out.println(user.getName());
 		
-		User user = userRepository.findByNomeUsuario("Jo");
-		System.out.println(user.getName());
+//		User user = userRepository.findByNomeUsuario("Jo");
+//		System.out.println(user.getName());
+//		
+//		User userEmail = userRepository.findByEmail("felipe.sales.dev@gmail.com");
+//		System.out.println(userEmail.getName());
 		
-		User userEmail = userRepository.findByEmail("felipe.sales.dev@gmail.com");
-		System.out.println(userEmail.getName());
+		User user = userRepository.findByNameIgnoreCase("maria");
+		
+		System.out.println(user.getName());
 	}
 	
 	public void createUser(String name, String email) {
