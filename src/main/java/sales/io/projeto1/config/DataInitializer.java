@@ -11,48 +11,42 @@ import sales.io.projeto1.entity.User;
 import sales.io.projeto1.repository.UserRepository;
 
 @Component
-public class DataInitializer implements ApplicationListener<ContextRefreshedEvent>  {
+public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
-	private UserRepository userRepository;
-	
+	UserRepository userRepository;
+
 	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		
+	public void onApplicationEvent(ContextRefreshedEvent arg0) {
+
 		List<User> users = userRepository.findAll();
-		
+
 		if (users.isEmpty()) {
-			createUser("Felipe Sales", "felipe.sales.dev@gmail.com");
-			createUser("João", "joao@gmail.com");
+
+			createUser("Felipe", "felipe.ferreira.sales@gmail.com");
+			createUser("João","joao@gmail.com");
 			createUser("Maria", "maria@gmail.com");
+			
 		}
 		
-//		User user = userRepository.getOne(2L);
-//		System.out.println(user.getName());
-		
-//		userRepository.deleteById(2l);
-		
-//		User user = userRepository.getOne(1L);
-//		user.setName("Felipe Ferreira de Sales");
-//		userRepository.save(user); 
-		
-//		User user = userRepository.findByName("Maria");
-//		System.out.println(user.getName());
-		
-//		User user = userRepository.findByNomeUsuario("Jo");
-//		System.out.println(user.getName());
-//		
-//		User userEmail = userRepository.findByEmail("felipe.sales.dev@gmail.com");
-//		System.out.println(userEmail.getName());
-		
-		User user = userRepository.findByNameIgnoreCase("maria");
-		
+		User user = userRepository.findByNameIgnoreCaseLike("mari");
+
 		System.out.println(user.getName());
+		
+		User userQuery = userRepository.findByQlqCoisa("felipe.ferreira.sales@gmail.com");
+		
+		System.out.println(userQuery.getEmail());
+
 	}
 	
+	
 	public void createUser(String name, String email) {
+		
 		User user = new User(name, email);
+		
 		userRepository.save(user);
+		
+		
 	}
+
 }
- 

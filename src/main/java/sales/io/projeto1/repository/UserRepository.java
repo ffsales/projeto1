@@ -1,19 +1,23 @@
 package sales.io.projeto1.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import sales.io.projeto1.entity.User;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+@Repository
+public interface UserRepository extends MongoRepository<User, String> {
 
 	User findByName(String name);
-	
-//	@Query("SELECT u FROM User u WHERE u.name = ?1")
-	@Query("SELECT u FROM User u WHERE u.name like ?1%")
-	User findByNomeUsuario(String name);
 	
 	User findByEmail(String email);
 	
 	User findByNameIgnoreCase(String name);
+	
+	User findByNameIgnoreCaseLike(String name);
+	
+	@Query("{'email': ?0}")
+	User findByQlqCoisa(String email);
+	
 }
